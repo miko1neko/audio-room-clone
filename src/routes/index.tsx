@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Headphones, Mic, Volume2, Music, Globe, Check } from "lucide-react";
 import bg from "@/assets/session-bg.jpg";
 
@@ -32,6 +32,8 @@ const perks = [
 ];
 
 function Index() {
+  const navigate = useNavigate();
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
       <img
@@ -107,6 +109,7 @@ function Index() {
             </div>
             <button
               type="button"
+              onClick={() => navigate({ to: "/voice" })}
               className="mt-5 flex w-full items-center justify-center gap-3 rounded-md bg-accent py-3.5 text-base text-accent-foreground transition-opacity hover:opacity-90"
             >
               <Music className="h-5 w-5" />
