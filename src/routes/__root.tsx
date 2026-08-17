@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "OpenAudioMc Session — Connect your game audio" },
+      { name: "description", content: "Start your OpenAudioMc session: choose audio only or audio with voice chat and immerse yourself in in-game spatial sound." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "OpenAudioMc Session — Connect your game audio" },
+      { property: "og:description", content: "Start your OpenAudioMc session: choose audio only or audio with voice chat and immerse yourself in in-game spatial sound." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "OpenAudioMc Session — Connect your game audio" },
+      { name: "twitter:description", content: "Start your OpenAudioMc session: choose audio only or audio with voice chat and immerse yourself in in-game spatial sound." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/09ab6129f581607ccc7111600624bf59/id-preview-1eace0ac--131620fc-5259-4ace-9bd6-ccd5f6bb13b6.lovable.app-1786938563765.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/09ab6129f581607ccc7111600624bf59/id-preview-1eace0ac--131620fc-5259-4ace-9bd6-ccd5f6bb13b6.lovable.app-1786938563765.png" },
     ],
     links: [
       {
