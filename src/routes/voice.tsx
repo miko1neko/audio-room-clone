@@ -72,7 +72,7 @@ function VoiceSession() {
   const [echoCancel, setEchoCancel] = useState(false);
 
   return (
-    <div className="relative flex min-h-screen bg-background">
+    <div className="relative flex h-screen overflow-hidden bg-background">
       <img
         src={bg}
         alt=""
@@ -112,9 +112,9 @@ function VoiceSession() {
         />
       </aside>
 
-      <div className="relative z-10 flex flex-1 flex-col lg:flex-row">
+      <div className="relative z-10 flex flex-1 flex-col overflow-hidden lg:flex-row">
         {/* Left panels */}
-        <div className="w-full space-y-4 overflow-y-auto p-4 lg:max-w-[420px]">
+        <div className="w-full flex-1 space-y-4 overflow-y-auto p-4 pb-20 lg:h-full lg:w-[420px] lg:flex-none lg:shrink-0">
           <section className="rounded-xl border border-accent/30 bg-card/85 p-6 backdrop-blur-sm">
             <div className="flex flex-col items-center">
               <img
@@ -297,7 +297,7 @@ function VoiceSession() {
         </div>
 
         {/* Main area */}
-        <main className="flex flex-1 items-center justify-center px-6 py-16">
+        <main className="flex flex-1 items-center justify-center overflow-hidden px-6 py-16">
           <div className="w-full max-w-xl text-center">
             <Users className="mx-auto h-12 w-12 text-destructive/80" />
             <h1 className="mt-6 text-3xl text-foreground">Looking for someone?</h1>
