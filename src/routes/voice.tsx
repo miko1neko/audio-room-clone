@@ -14,6 +14,7 @@ import {
   UserPlus,
   Music,
   Globe,
+  Zap,
 } from "lucide-react";
 import bg from "@/assets/session-bg.jpg";
 
@@ -65,6 +66,10 @@ const hints = [
 
 function VoiceSession() {
   const [volume, setVolume] = useState(100);
+  const [autoSensitivity, setAutoSensitivity] = useState(false);
+  const [threshold, setThreshold] = useState(72);
+  const [monitoring, setMonitoring] = useState(false);
+  const [echoCancel, setEchoCancel] = useState(false);
 
   return (
     <div className="relative flex min-h-screen bg-background">
@@ -204,6 +209,90 @@ function VoiceSession() {
                 </div>
               </div>
             </div>
+
+            <div className="mt-4 rounded-lg border border-border bg-secondary/50 p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-base font-semibold text-foreground">Automatic Sensitivity</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Let the system automatically adjust your microphone threshold
+                  </p>
+                </div>
+                <Toggle checked={autoSensitivity} onChange={setAutoSensitivity} label="Automatic sensitivity" />
+              </div>
+            </div>
+
+            <div className="mt-5">
+              <h3 className="text-base font-semibold text-foreground">Manual Threshold Control</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Adjust how loud you need to speak for your microphone to activate. The blue bar shows
+                your current microphone level. Move the slider to set when you want to start
+                transmitting.
+              </p>
+
+              <div className="relative mt-4 flex items-center justify-between overflow-hidden rounded-md bg-secondary px-3 py-2.5 text-sm text-foreground">
+                <span className="absolute inset-y-0 left-0 w-1.5 bg-accent" />
+                <span
+                  className="absolute inset-y-0 w-px bg-primary/70"
+                  style={{ left: `${threshold}%` }}
+                />
+                <span className="relative">Quiet</span>
+                <span className="relative">Loud</span>
+              </div>
+
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={threshold}
+                onChange={(e) => setThreshold(Number(e.target.value))}
+                aria-label="Microphone threshold"
+                className="mt-4 h-2 w-full cursor-pointer appearance-none rounded-full"
+                style={{
+                  background: `linear-gradient(to right, var(--primary) ${threshold}%, var(--secondary) ${threshold}%)`,
+                }}
+              />
+              <div className="mt-2 flex justify-between text-sm text-muted-foreground">
+                <span>More Sensitive</span>
+                <span>Less Sensitive</span>
+              </div>
+
+              <div className="mt-4 flex items-center justify-center gap-2 rounded-md bg-accent/15 py-3 text-base text-accent">
+                <span className="h-3 w-1.5 rounded-sm bg-accent" />
+                Microphone Active
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded-xl border border-border bg-card/85 p-5 backdrop-blur-sm">
+            <div className="flex items-start gap-4">
+              <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-chart-4/20 text-chart-4">
+                <Mic className="h-4 w-4" />
+              </span>
+              <div className="flex-1">
+                <p className="text-base font-semibold text-foreground">
+                  Microphone Monitoring (hear yourself)
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  This will allow you to hear yourself through your speakers, this is useful if you
+                  want to make sure that your microphone is working properly.
+                </p>
+              </div>
+              <Toggle checked={monitoring} onChange={setMonitoring} label="Microphone monitoring" />
+            </div>
+          </section>
+
+          <section className="rounded-xl border border-border bg-card/85 p-5 backdrop-blur-sm">
+            <div className="flex items-start gap-4">
+              <span className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/20 text-primary">
+                <Zap className="h-4 w-4" />
+              </span>
+              <div className="flex-1">
+                <p className="text-base font-semibold text-foreground">Echo cancellation</p>
+                <p className="mt-1 text-sm text-muted-foreground">Reduce echo and feedback</p>
+              </div>
+              <Toggle checked={echoCancel} onChange={setEchoCancel} label="Echo cancellation" />
+            </div>
           </section>
         </div>
 
@@ -248,5 +337,34 @@ function VoiceSession() {
         </a>
       </footer>
     </div>
+  );
+}
+
+function Toggle({
+  checked,
+  onChange,
+  label,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      className={`relative h-7 w-13 shrink-0 rounded-full transition-colors ${
+        checked ? "bg-primary" : "bg-secondary"
+      }`}
+    >
+      <span
+        className={`absolute top-1 h-5 w-5 rounded-full bg-foreground transition-all ${
+          checked ? "left-7" : "left-1"
+        }`}
+      />
+    </button>
   );
 }
